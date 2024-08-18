@@ -1,13 +1,12 @@
-import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-
-const HomeHeader = () => {
-    return (
-        <View style={styles.container}>
-            <Text>HomeHeader</Text>
-        </View>
-    );
-};
-
-
-export default HomeHeader;
+export const styles = StyleSheet.create({
+    button: {
+        padding: 10,
+        backgroundColor: '#007BFF',
+        borderRadius: 5,
+    },
+    text: {
+        color: '#fff',
+        textAlign: 'center',
+        fontSize: 16,
+    },
+});
