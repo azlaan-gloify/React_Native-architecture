@@ -615,3 +615,144 @@ npm run ios:prod
 - Dont push your actual .env files to github, the above .env files has been pushed for demo purpose
 
 ---
+
+## Firebase Crashlytics Integration
+
+This project uses Firebase Crashlytics to monitor app stability and track crashes. Follow the steps below to set up and integrate Firebase Crashlytics into the project.
+
+### Prerequisites
+
+Before integrating Firebase Crashlytics, ensure you have the following:
+
+1. A Firebase project set up in the [Firebase Console](https://console.firebase.google.com/).
+2. The Firebase CLI installed on your machine.
+3. The React Native Firebase modules installed in your project.
+
+### Step 1: Set Up Firebase in the Project
+
+1. **Create a Firebase Project:**
+
+   - Visit the [Firebase Console](https://console.firebase.google.com/).
+   - Create a new Firebase project or select an existing one.
+
+2. **Add Your App to Firebase:**
+   - **For Android:**
+     - Register your Android app with the package name found in `android/app/src/main/AndroidManifest.xml`.
+     - Download the `google-services.json` file from Firebase and place it in the `android/app/` directory.
+   - **For iOS:**
+     - Register your iOS app with the bundle ID found in `ios/{YourProjectName}/Info.plist`.
+     - Download the `GoogleService-Info.plist` file from Firebase and add it to your Xcode project, ensuring it is included in the project and target settings.
+
+### Step 2: Install Firebase Crashlytics Dependencies
+
+1. **Install React Native Firebase Modules:**
+
+   ```bash
+   npm install @react-native-firebase/app @react-native-firebase/crashlytics
+   ```
+
+2. **For iOS:**
+
+   - Navigate to the `ios` directory and install the CocoaPods dependencies:
+
+   ```bash
+   cd ios
+   pod install
+   cd ..
+   ```
+
+### Step 3: Configure Firebase Crashlytics
+
+#### Android Configuration
+
+1. **Update `android/build.gradle`:**
+
+   - Add the Firebase and Crashlytics classpaths:
+
+   ```gradle
+   buildscript {
+       dependencies {
+           classpath 'com.google.gms:google-services:4.3.15'
+           classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.8'
+       }
+   }
+   ```
+
+2. **Update `android/app/build.gradle`:**
+
+   - Apply the Google services and Crashlytics plugins:
+
+   ```gradle
+   apply plugin: 'com.google.gms.google-services'
+   apply plugin: 'com.google.firebase.crashlytics'
+   ```
+
+   - Ensure the following dependencies are included:
+
+   ```gradle
+   dependencies {
+       implementation 'com.google.firebase:firebase-crashlytics-ktx'
+   }
+   ```
+
+3. **Enable ProGuard for Crashlytics (Optional):**
+
+   - If using ProGuard, add these rules in `proguard-rules.pro`:
+
+   ```pro
+   -keepattributes SourceFile,LineNumberTable
+   -keep class * { *; }
+   -dontwarn okhttp3.**
+   ```
+
+#### iOS Configuration
+
+1. **Update `Podfile`:**
+
+   - Ensure the Firebase Crashlytics pod is included:
+
+   ```ruby
+   pod 'Firebase/Core'
+   pod 'Firebase/Crashlytics'
+   ```
+
+2. **Add Run Script for Crashlytics:**
+
+   - In Xcode, go to your project settings, navigate to `Build Phases`, and add a new "Run Script Phase" with the following script:
+
+   ```bash
+   "${PODS_ROOT}/FirebaseCrashlytics/run"
+   ```
+
+### Step 4: Initialize Crashlytics in React Native
+
+1. **Enable Crashlytics in your App:**
+
+   - Import and initialize Firebase Crashlytics in your app entry point (`index.js` or `App.js`):
+
+   ```javascript
+   import crashlytics from '@react-native-firebase/crashlytics';
+
+   crashlytics().log('App started');
+   ```
+
+2. **Optional: Force a Test Crash**
+
+   - You can force a test crash to ensure Crashlytics is properly configured:
+
+   ```javascript
+   crashlytics().crash();
+   ```
+
+### Step 5: Verify Integration
+
+After running your app and triggering any crashes, check the Firebase Console under "Crashlytics" to verify that the crashes are reported correctly.
+
+### Notes
+
+- **Release vs. Debug:** Crashlytics typically logs data from release builds. Make sure to test with a release build for accurate results.
+- **ProGuard/R8 Configuration:** Ensure your ProGuard/R8 settings are correctly configured to avoid issues with obfuscation.
+
+By following these steps, you should have Firebase Crashlytics integrated and configured in your React Native project. This will help you monitor app stability and resolve issues more effectively.
+
+---
