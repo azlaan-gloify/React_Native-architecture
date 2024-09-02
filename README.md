@@ -118,6 +118,62 @@ The project has the following major components:
 
 ## Folder Structure Explanation
 
+## Structure
+
+```plaintext
+ReactNativeProject/
+├── android/
+├── ios/
+├── src/
+│   ├── api/
+│   │   ├── client.js
+│   │   ├── endpoints.js
+│   │   └── index.js
+│   ├── assets/
+│   │   ├── fonts/
+│   │   └── images/
+│   ├── components/
+│   │   └── Button.js
+│   ├── config/
+│   │   ├── env.js
+│   │   └── index.js
+│   ├── constants/
+│   │   ├── colors.js
+│   │   ├── fonts.js
+│   │   ├── images.js
+│   │   └── strings.js
+│   ├── hooks/
+│   │   └── useFetch.js
+│   ├── i18n/
+│   │   ├── en.json
+│   │   ├── es.json
+│   │   └── index.js
+│   ├── navigation/
+│   │   ├── AppNavigator.js
+│   │   └── index.js
+│   ├── redux/
+│   │   ├── actions/
+│   │   ├── reducers/
+│   │   ├── store.js
+│   │   └── types.js
+│   ├── screens/
+│   │   ├── HomeScreen.js
+│   │   └── DetailsScreen.js
+│   ├── styles/
+│   │   ├── globalStyles.js
+│   │   └── index.js
+│   ├── utils/
+│   │   ├── helpers.js
+│   │   └── index.js
+│   └── App.js
+├── .babelrc
+├── .eslintrc.js
+├── .prettierrc.js
+├── index.js
+└── README.md
+
+```
+
 ### 1. `src/api/`
 
 Handles network requests using Axios. It includes:
@@ -216,10 +272,6 @@ To run the project locally:
 
    ***
 
-   # ReactNativeProject
-
-This React Native project is organized using best industry practices to ensure scalability, maintainability, and ease of development. Below, you'll find a detailed explanation of the project structure, as well as setup instructions for both Android and iOS platforms.
-
 ## Table of Contents
 
 - [Project Structure](#project-structure)
@@ -240,62 +292,6 @@ This React Native project is organized using best industry practices to ensure s
   - [Android Setup](#android-setup)
   - [iOS Setup](#ios-setup)
 - [Running the Project](#running-the-project)
-
-## Project Structure
-
-```plaintext
-ReactNativeProject/
-├── android/
-├── ios/
-├── src/
-│   ├── api/
-│   │   ├── client.js
-│   │   ├── endpoints.js
-│   │   └── index.js
-│   ├── assets/
-│   │   ├── fonts/
-│   │   └── images/
-│   ├── components/
-│   │   └── Button.js
-│   ├── config/
-│   │   ├── env.js
-│   │   └── index.js
-│   ├── constants/
-│   │   ├── colors.js
-│   │   ├── fonts.js
-│   │   ├── images.js
-│   │   └── strings.js
-│   ├── hooks/
-│   │   └── useFetch.js
-│   ├── i18n/
-│   │   ├── en.json
-│   │   ├── es.json
-│   │   └── index.js
-│   ├── navigation/
-│   │   ├── AppNavigator.js
-│   │   └── index.js
-│   ├── redux/
-│   │   ├── actions/
-│   │   ├── reducers/
-│   │   ├── store.js
-│   │   └── types.js
-│   ├── screens/
-│   │   ├── HomeScreen.js
-│   │   └── DetailsScreen.js
-│   ├── styles/
-│   │   ├── globalStyles.js
-│   │   └── index.js
-│   ├── utils/
-│   │   ├── helpers.js
-│   │   └── index.js
-│   └── App.js
-├── .babelrc
-├── .eslintrc.js
-├── .prettierrc.js
-├── index.js
-└── README.md
-
-```
 
 Folder Structure Details
 src/api/
