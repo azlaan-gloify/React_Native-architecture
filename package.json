@@ -5,13 +5,17 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
+    "start": "react-native start --reset-cache",
+    "android:dev": "ENVFILE=.env.development react-native run-android",
+    "android:prod": "ENVFILE=.env.production react-native run-android",
+    "android:stage": "ENVFILE=.env.staging react-native run-android",
     "lint": "eslint .",
-    "start": "react-native start",
     "test": "jest"
   },
   "dependencies": {
     "react": "18.3.1",
-    "react-native": "0.75.1"
+    "react-native": "0.75.1",
+    "react-native-dotenv": "^3.4.11"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

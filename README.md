@@ -500,3 +500,118 @@ sh
     npx react-native run-ios
 
 Note: Ensure that your Metro server is running before attempting to build and run the app on any platform.
+
+Here's a draft for a README section on how to use `.env` files and generate builds for different environments in your React Native project:
+
+---
+
+## Environment Configuration
+
+This project uses `.env` files to manage environment-specific configurations, such as API URLs, keys, and other variables that may differ between development, staging, and production environments.
+
+### Setting Up Environment Variables
+
+We use the `react-native-config` package (or `react-native-dotenv`) to manage environment variables.
+
+1. **Create Environment Files:**
+
+   Create separate `.env` files for each environment in the root directory of the project:
+
+   - `.env.development` - Configuration for development environment.
+   - `.env.staging` - Configuration for staging environment.
+   - `.env.production` - Configuration for production environment.
+
+   Each file should define the environment-specific variables in the following format:
+
+   ```env
+   API_URL=https://your-api-url.com
+   API_KEY=your-api-key
+   ```
+
+   Example `.env.development`:
+
+   ```env
+   API_URL=https://dev-api.example.com
+   API_KEY=dev-secret-key
+   ```
+
+2. **Using Environment Variables in Code:**
+
+   You can import and use the environment variables in your React Native components as follows:
+
+   ```javascript
+   import Config from 'react-native-config';
+
+   console.log('API URL:', Config.API_URL);
+   ```
+
+   Or, if using `react-native-dotenv`:
+
+   ```javascript
+   import {API_URL, API_KEY} from '@env';
+
+   console.log('API URL:', API_URL);
+   ```
+
+### Generating Builds for Different Environments
+
+To build and run the app with the appropriate environment configuration, specify the `.env` file when executing the build commands.
+
+1. **Development Build:**
+
+   To run the app in development mode using `.env.development`:
+
+   ```bash
+   ENVFILE=.env.development npx react-native run-android
+   ENVFILE=.env.development npx react-native run-ios
+   ```
+
+2. **Staging Build:**
+
+   To run the app in staging mode using `.env.staging`:
+
+   ```bash
+   ENVFILE=.env.staging npx react-native run-android
+   ENVFILE=.env.staging npx react-native run-ios
+   ```
+
+3. **Production Build:**
+
+   To run the app in production mode using `.env.production`:
+
+   ```bash
+   ENVFILE=.env.production npx react-native run-android
+   ENVFILE=.env.production npx react-native run-ios
+   ```
+
+### Example npm Scripts
+
+For convenience, you can add npm scripts to your `package.json` to automate the build process:
+
+```json
+"scripts": {
+  "android:dev": "ENVFILE=.env.development react-native run-android",
+  "android:staging": "ENVFILE=.env.staging react-native run-android",
+  "android:prod": "ENVFILE=.env.production react-native run-android",
+  "ios:dev": "ENVFILE=.env.development react-native run-ios",
+  "ios:staging": "ENVFILE=.env.staging react-native run-ios",
+  "ios:prod": "ENVFILE=.env.production react-native run-ios"
+}
+```
+
+Now you can run the app with a specific environment by simply running one of the following commands:
+
+```bash
+npm run android:dev
+npm run android:prod
+npm run ios:dev
+npm run ios:prod
+```
+
+### Notes
+
+- Ensure that your `.env` files are listed in `.gitignore` to avoid committing sensitive information to the repository.
+- If you add new environment variables, be sure to restart your development server for the changes to take effect.
+- Dont push your actual .env files to github, the above .env files has been pushed for demo purpose
+
+---

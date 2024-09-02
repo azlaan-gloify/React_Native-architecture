@@ -16,6 +16,7 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
+import { API_URL, API_KEY } from '@env';
 
 import {
   Colors,
@@ -61,6 +62,8 @@ function App(): React.JSX.Element {
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
+
+  console.log('API URL:', { API_URL, API_KEY });
 
   return (
     <SafeAreaView style={backgroundStyle}>
